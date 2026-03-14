@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+<div class="grid grid-cols-4">
+
+  <div class="flex items-center ">
+    <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute bottom-30 text-center"><button class="text-xl">Recall Order</button></div>
+    <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute bottom-5 text-center"><button class="text-xl">Bump Order</button></div>
+  </div>
+  
+  <div class="orders-container grid grid-cols-2 gap-4 col-span-2">
+    
+
+    <div class="order relative border-3 border-solid rounded-md mb-5">
+      <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2 ">
+        <h3 class="text-2xl font-bold text-left">#849</h3>
+        <h3 class="text-2xl font-bold text-center">1:09</h3>
+        <h3 class="text-sm font-bold text-right ">Deliver To: Customer at Expo</h3>
+      </div>
+      <div class="flex flex-row gap-4">
+      <div class="flex-1">
+        <h2 class="text-lg font-bold border-dashed border-b-2 p-1">Street Tacos</h2>
+        <ul class="text-base p-2">
+          <li>Tortilla</li>
+          <li>Taco Beef</li>
+          <li>*Send To Finisher*</li>
+          <li>Shredded Cheddar</li>
+          <li>Lettuce</li>
+        </ul> 
+      </div>
+      </div>
+      <!-- <div class="bump-btn absolute bottom-0 right-0 bg-neutral-500 inline-block p-3 font-bold text-center text-2xl rounded-md border-3 m-2">
+        <p>Bump</p>
+      </div> -->
+      </div>
+ 
+      <div class="order relative border-3 border-solid rounded-md mb-5">
+      <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2 ">
+        <h3 class="text-2xl font-bold text-left">#849</h3>
+        <h3 class="text-2xl font-bold text-center">1:09</h3>
+        <h3 class="text-sm font-bold text-right ">Deliver To: Customer at Expo</h3>
+      </div>
+
+      <div class="flex-1">
+          <h2 class="text-lg font-bold border-dashed border-b-2 p-1">Stacked Burger</h2>
+            <ul class=" inline-block text-base p-2">
+              <li>Bun</li>
+              <li class="bg-amber-800 rounded-md font-bold text-center">TOAST</li>
+              <li>Mayo</li>
+              <li>Ketchup</li>
+              <li>Stacked Burger - 2</li>
+              <li class="bg-lime-700 rounded-md font-bold text-center">Send To Finisher</li>
+              <li>American Cheese - 2</li>
+              <li>
+                <ul class="bg-amber-800 rounded-md p-1">
+                  <li class="font-bold text-center">BUILD</li>
+                  <li>Stacked Burger</li>
+                  <li>American Cheese</li>
+                  <li>Stacked Burger</li>
+                  <li>American Cheese</li>
+                </ul>
+              </li>
+              <li>Lettuce</li>
+            </ul>
+          </div>
+          
+        </div>
+
+        
+    
+
+
+    <div class="order relative border-3 border-solid rounded-md col-span-2">
+      <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2 ">
+        <h3 class="text-2xl font-bold text-left">#849</h3>
+        <h3 class="text-2xl font-bold text-center">1:09</h3>
+        <h3 class="text-sm font-bold text-right ">Deliver To: Customer at Expo</h3>
+      </div>
+
+      <div class="grid grid-flow-col gap-4">
+
+        <div class="flex-1">
+          <h2 class="text-lg font-bold border-dashed border-b-2 p-1">Street Tacos</h2>
+            <ul class="text-base p-2">
+              <li>Tortilla</li>
+              <li>Taco Beef</li>
+              <li>*Send To Finisher*</li>
+              <li>Shredded Cheddar</li>
+              <li>Lettuce</li>
+            </ul>
+        </div>
+
+        <div class="flex-1">
+          <h2 class="text-lg font-bold border-dashed border-b-2 p-1">Stacked Burger</h2>
+            <ul class=" inline-block text-base p-2">
+              <li>Bun</li>
+              <li class="bg-amber-800 rounded-md font-bold text-center">TOAST</li>
+              <li>Mayo</li>
+              <li>Ketchup</li>
+              <li>Stacked Burger - 2</li>
+              <li class="bg-lime-700 rounded-md font-bold text-center">Send To Finisher</li>
+              <li>American Cheese - 2</li>
+              <li>
+                <ul class="bg-amber-800 rounded-md p-1">
+                  <li class="font-bold text-center">BUILD</li>
+                  <li>Stacked Burger</li>
+                  <li>American Cheese</li>
+                  <li>Stacked Burger</li>
+                  <li>American Cheese</li>
+                </ul>
+              </li>
+              <li>Lettuce</li>
+            </ul>
+          </div>
+   
+        </div>
+
+        
+      </div>
+
+  </div>
+ 
+  <div class="flex flex-col items-center h-screen">
+    <div>
+      <p class="text-center text-xl">Orders</p>
+      <p class="text-center text-xl">04:30Pm</p>
+    </div>
+    
+    <div>
+      <pre class="text-center text-xl">#649  6 Mins✅</pre>
+      <hr>
+      <pre class="text-center text-xl">#651  6 Mins</pre>
+      <hr>
+      <pre class="text-center text-xl">#649  6 Mins✅</pre>
+      <hr>
+      <pre class="text-center text-xl">#649 6 Mins✅</pre>
+      <hr>
+      <pre class="text-center text-xl">#649       6 Mins</pre>
+      <hr>
+    </div>
+    
+    <div class="absolute bottom-50">
+      <div class="flex items-center h-40 w-40 rounded-full border-5 border-green-600 text-center">
+        <p class="text-lg  w-full font-bold">Freak Status!</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

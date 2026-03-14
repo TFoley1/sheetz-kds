@@ -1,0 +1,14 @@
+const orders = [
+  {
+    itemName: "burger",
+    ingredients: ["bun", "mayo", "burger", "american cheese"],
+    orderNumber: "849",
+    isSelected: false
+  },
+  {
+    itemName: "fries",
+    ingredients: ["potato", "salt"],
+    orderNumber: "850",
+    isSelected: false
+  }
+];
