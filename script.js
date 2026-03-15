@@ -1,3 +1,18 @@
+const activeOrders = [
+    {
+    "itemName": "Burger",
+    "ingredients": ["bun", "mayo", "burger", "american cheese"],
+    "orderNumber": "849",
+    "isSelected": false
+    },
+    {
+    "itemName": "Street Tacos",
+    "ingredients": ["Tortilla", "Taco Beef", "Shredded Cheddar", "Lettuce"],
+    "orderNumber": "851",
+    "isSelected": false
+    }
+]
+
 $(document).ready(function(){
     $(".bump-btn ").hide();
 
