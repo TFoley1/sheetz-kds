@@ -151,4 +151,14 @@ $(document).ready(function(){
     });
 }); 
 
+function renderIngredient(ingredient) {
 
+}
+
+function renderItem(item) {
+
+}
+
+function renderOrder(order) {
+
+}
