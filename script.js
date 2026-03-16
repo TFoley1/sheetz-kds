@@ -1,3 +1,4 @@
+let selectedOrder;
 const activeOrders = [
     {
     "itemName": "Burger",
@@ -14,18 +15,19 @@ const activeOrders = [
 ]
 
 $(document).ready(function(){
-    $(".bump-btn ").hide();
 
-    $(".bump-btn ").click(function() {
-        // $(this) refers to the clicked button
-        // .parent() gets the immediate parent
-        // .remove() removes the parent element and everything inside it
-        $(this).parent().remove();
+    $("#bump-btn").click(function() {
+        // Selected Order gets saved to inactive order list at the beginning
+        // Selected order gets removed from screen
+        selectedOrder.remove();
     });
 
     $(".order").click(function() {
-        $(".bump-btn").hide();
-        $(this).find(".bump-btn").show();
+        $(".order").css("background-color","black")
+        // Save order data into variable
+        // Highlight background
+        selectedOrder = $(this);
+        selectedOrder.css("background-color","gray");
     });
 
 }); 
