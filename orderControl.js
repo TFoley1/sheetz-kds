@@ -6,22 +6,33 @@ const activeOrders = [
     items: [
         {
         "itemName": "Burger",
-        "ingredients": ["bun", "mayo", "burger", "american cheese"]
+        ingredients: [
+            { name: "Bun", type: "ingredient" },
+            { name: "TOAST", type: "modifier" },
+            { name: "Mayo", type: "ingredient" },
+            { name: "Stacked Burger", qty: 2, type: "ingredient" },
+            { name: "Send To Finisher", type: "tag" },
+            { name: "American Cheese", qty: 2, type: "ingredient" },
+            {
+                type: "build",
+                name: "BUILD",
+                ingredients: [
+                "Stacked Burger",
+                "American Cheese",
+                "Stacked Burger",
+                "American Cheese"
+                ]
+            },
+            { name: "Lettuce", type: "ingredient" }
+]
         },
         {
         "itemName": "Hot Dog",
-        "ingredients": ["Hot dog bun", "mmustard", "hot dog"]
-        }
-    ]
-    },
-    {
-    "orderNumber": "851",
-    "timer": "1:09",
-    "deliverTo":"Deliver To: Customer at Expo",
-    items: [
-        {
-        "itemName": "Burger",
-        "ingredients": ["bun", "mayo", "burger", "american cheese"]
+        ingredients: [
+            { name: "Hot Dog Bun", type: "ingredient" },
+            { name: "Mustard", type: "ingredient" },
+            { name: "Hot Dog", type: "ingredient"}
+        ]
         }
     ]
     }
@@ -55,7 +66,34 @@ function renderOrders() {
 
       // LOOP THROUGH INGREDIENTS
       item.ingredients.forEach(ingredient => {
-        ingredientsHTML += `<li>${ingredient}</li>`;
+        let buildItems = "";
+         if (ingredient.type === "ingredient") {
+            if (ingredient.qty == null) {
+                ingredientsHTML += `<li>${ingredient.name}</li>`;
+            } else {
+                ingredientsHTML += `<li>${ingredient.name} - ${ingredient.qty}</li>`;
+            }
+            
+        }
+        if (ingredient.type === "modifier") {
+            ingredientsHTML += `<li class="bg-amber-800 font-bold text-center rounded-md">${ingredient.name}</li>`;
+        }
+        if (ingredient.type === "tag") {
+            ingredientsHTML += `<li class="bg-lime-700 font-bold text-center rounded-md">${ingredient.name}</li>`;
+        }
+        if (ingredient.type === "build") {
+            ingredient.ingredients.forEach(i => {
+                buildItems += `<li>${i}</li>`;
+            });
+            ingredientsHTML += `
+                <li>
+                <ul class="bg-amber-800 rounded-md p-1">
+                    <li class="font-bold text-center">${ingredient.name}</li>
+                    ${buildItems}
+                </ul>
+                </li>
+            `;
+        }
       });
 
       itemsHTML += `
