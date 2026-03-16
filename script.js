@@ -1,24 +1,5 @@
 let selectedOrder;
-const activeOrders = [
-    {
-    "itemName": "Burger",
-    "ingredients": ["bun", "mayo", "burger", "american cheese"],
-    "orderNumber": "849",
-    "isSelected": false
-    },
-    {
-    "itemName": "Street Tacos",
-    "ingredients": ["Tortilla", "Taco Beef", "Shredded Cheddar", "Lettuce"],
-    "orderNumber": "851",
-    "isSelected": false
-    },
-    {
-    "itemName": "Burger",
-    "ingredients": ["bun", "mayo", "burger", "american cheese"],
-    "orderNumber": "849",
-    "isSelected": false
-    }
-]
+
 
 $(document).ready(function(){
 
@@ -35,5 +16,4 @@ $(document).ready(function(){
         selectedOrder = $(this);
         selectedOrder.css("background-color","rgb(30, 30, 30)");
     });
-
 }); 

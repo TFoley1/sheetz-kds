@@ -6,6 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="script.js"></script>
+    <script src="orderControl.js"></script>
     <link rel="stylesheet" href="style.css">
     
 </head>
@@ -17,9 +18,9 @@
     <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute bottom-5 text-center cursor-pointer" id="bump-btn"""><p class="text-xl">Bump Order</p></div>
   </div>
   
-  <div class="orders-container grid grid-cols-2 gap-4 col-span-2">
+  <div id="orders-container" class="grid grid-cols-2 gap-4 col-span-2">
     
-
+<!-- 
     <div class="order relative border-3 border-solid rounded-md mb-5">
       <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2 ">
         <h3 class="text-2xl font-bold text-left">#849</h3>
@@ -40,8 +41,8 @@
       </div>
       <!-- <div class="bump-btn absolute bottom-0 right-0 bg-neutral-500 inline-block p-3 font-bold text-center text-2xl rounded-md border-3 m-2">
         <p>Bump</p>
-      </div> -->
       </div>
+  </div>
  
       <div class="order relative border-3 border-solid rounded-md mb-5">
       <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2 ">
@@ -121,11 +122,8 @@
               <li>Lettuce</li>
             </ul>
           </div>
-   
         </div>
-
-        
-      </div>
+      </div> -->
 
   </div>
  
