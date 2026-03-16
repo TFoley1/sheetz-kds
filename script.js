@@ -11,6 +11,12 @@ const activeOrders = [
     "ingredients": ["Tortilla", "Taco Beef", "Shredded Cheddar", "Lettuce"],
     "orderNumber": "851",
     "isSelected": false
+    },
+    {
+    "itemName": "Burger",
+    "ingredients": ["bun", "mayo", "burger", "american cheese"],
+    "orderNumber": "849",
+    "isSelected": false
     }
 ]
 
@@ -23,11 +29,11 @@ $(document).ready(function(){
     });
 
     $(".order").click(function() {
-        $(".order").css("background-color","black")
+        $(".order").css("background-color","rgb(8,8,8)");
         // Save order data into variable
         // Highlight background
         selectedOrder = $(this);
-        selectedOrder.css("background-color","gray");
+        selectedOrder.css("background-color","rgb(30, 30, 30)");
     });
 
 }); 
