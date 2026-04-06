@@ -11,12 +11,31 @@
     
 </head>
 <body>
+  
+<!-- Modal for Switching Stations -->
+<div class="fixed inset-0 z-40 flex items-center justify-center" id="switch-station-modal">
+
+  <!-- Background Overlay -->
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
+
+  <!-- Content (When adding new stations update columns)-->
+  <div class="relative grid grid-cols-3 gap-2 text-center text-lg bg-neutral-900 p-4 rounded-lg shadow-xl">
+    <a href="starter.html"><div class="w-36 h-12 bg-neutral-400 rounded-md flex items-center justify-center text-3xl cursor-pointer">STARTER</div></a>
+    <a href="finisher.html"><div class="w-36 h-12 bg-neutral-400 rounded-md flex items-center justify-center text-3xl cursor-pointer">FINISHER</div></a>
+    <!-- <div class="w-36 h-12 bg-neutral-400 rounded-md flex items-center justify-center text-3xl cursor-pointer">FRYER</div>
+     <div class="w-36 h-12 bg-neutral-400 rounded-md flex items-center justify-center text-3xl cursor-pointer">SBC</div> -->
+    <a href="expo.html"><div class="w-36 h-12 bg-neutral-400 rounded-md flex items-center justify-center text-3xl cursor-pointer">EXPO</div> </a>
+  </div>
+</div>
+
 <div class="grid grid-cols-4">
 
   <div class="flex items-center ">
     <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute bottom-30 text-center"><p class="text-xl">Recall Order</p></div>
     <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute bottom-5 text-center cursor-pointer" id="bump-btn"""><p class="text-xl">Bump Order</p></div>
+    <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute text-center cursor-pointer bottom-55" id="switch-station-btn"><p class="text-xl">Switch Station</p></div>
   </div>
+  
   
   <div id="orders-container" class="grid grid-cols-2 gap-4 col-span-2">
     
@@ -43,7 +62,7 @@
         <p>Bump</p>
       </div>
   </div>
- 
+ <!--
       <div class="order relative border-3 border-solid rounded-md mb-5">
       <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2 ">
         <h3 class="text-2xl font-bold text-left">#849</h3>

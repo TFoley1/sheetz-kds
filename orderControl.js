@@ -39,13 +39,7 @@ const activeOrders = [
 ]
 
 const inactiveOrders = [
-    {
-    "itemName": "Street Tacos",
-    "ingredients": ["Tortilla", "Taco Beef", "Shredded Cheddar", "Lettuce","Boom Boom Sauce"],
-    "orderNumber": "848",
-    "timer": "1:09",
-    "deliverTo":"Deliver To: Customer at Expo"
-    }
+    
 ];
 
 // Take JSON and turn it into HTML & Tailwind
