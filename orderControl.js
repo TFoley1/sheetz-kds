@@ -304,8 +304,35 @@ function renderOrder(order) {
     order.items.forEach(item => {
         itemsHTML += renderItem(item);
     });
+    // add if for beginning of innerHTML to change the color if order.timer is  < 3 min as well as < 5 min
+    if (order.getElapsedTime() >= 180) {
+        orderCard.innerHTML = `
+        <div class="grid grid-cols-3 gap-4 bg-yellow-700 border-b-3 p-2">
+            <h3 class="text-xl font-bold">Order #${order.orderNumber}</h3>
+            <h3 class="text-2xl font-bold text-center">${order.timer}</h3>
+            <h3 class="text-sm font-bold text-center">${order.deliverTo}</h3>
+        </div>
 
-    orderCard.innerHTML = `
+        <div class="flex flex-row gap-4">
+        ${itemsHTML}
+        </div>
+    `; 
+    }
+    else if (order.getElapsedTime() >= 300) {
+        orderCard.innerHTML = `
+        <div class="grid grid-cols-3 gap-4 bg-red-700 border-b-3 p-2">
+            <h3 class="text-xl font-bold">Order #${order.orderNumber}</h3>
+            <h3 class="text-2xl font-bold text-center">${order.timer}</h3>
+            <h3 class="text-sm font-bold text-center">${order.deliverTo}</h3>
+        </div>
+
+        <div class="flex flex-row gap-4">
+        ${itemsHTML}
+        </div>
+    `; 
+    }
+    else {
+        orderCard.innerHTML = `
         <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2">
             <h3 class="text-xl font-bold">Order #${order.orderNumber}</h3>
             <h3 class="text-2xl font-bold text-center">${order.timer}</h3>
@@ -315,7 +342,9 @@ function renderOrder(order) {
         <div class="flex flex-row gap-4">
         ${itemsHTML}
         </div>
-    `;
+    `; 
+    }
+    
 
     return orderCard;
 }
@@ -335,7 +364,7 @@ function updateAllOrderTimers(orders) {
     // format to seconds
     // formate seconds to MM:SS
     orders.forEach((order) => {
-        const elapsedSeconds = Math.floor((now - order.orderStartTime) / 1000);
+        const elapsedSeconds = order.getElapsedTime();
         order.timer = formatTime(elapsedSeconds);
     });
 }

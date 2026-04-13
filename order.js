@@ -18,9 +18,9 @@ class Order {
 
     getElapsedTime() {
         // finds elapsed time doesn't actually run a timer, update/check elsewhere 
-        return Date.now() - this.orderStartTime;
+        return Math.floor((Date.now() - this.orderStartTime) / 1000);
     }
-
+    
     nextStation() {
         this.stationIndex++;
 
