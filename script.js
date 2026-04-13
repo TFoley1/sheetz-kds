@@ -13,4 +13,6 @@ $(document).ready(function(){
        $("#switch-station-modal").hide();
        // Let user click links to stations
     });
+
+    
 }); 

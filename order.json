@@ -1,6 +1,123 @@
-{
-  "itemName": "Burger",
-  "ingredients": ["bun", "mayo", "burger", "american cheese"],
-  "orderNumber": "849",
-  "isSelected": false
-}
+items: [
+  {
+    "itemName": "MTO Burger",
+    ingredients: [
+      { name: "Brioche Bun", type: "ingredient" },
+      { name: "TOAST", type: "modifier" },
+      { name: "Angus Beef Patty", qty: 2, type: "ingredient" },
+      { name: "American Cheese", qty: 2, type: "ingredient" },
+      { name: "Bacon", type: "ingredient" },
+      { name: "Ketchup", type: "ingredient" },
+      { name: "Send To Finisher", type: "tag" },
+      {
+        type: "build",
+        name: "BUILD",
+        ingredients: [
+          "Angus Beef Patty",
+          "American Cheese",
+          "Angus Beef Patty",
+          "American Cheese",
+          "Bacon"
+        ]
+      },
+      { name: "Pickles", type: "ingredient" }
+    ]
+  },
+  {
+    "itemName": "Chicken Tender Sub",
+    ingredients: [
+      { name: "Sub Roll", type: "ingredient" },
+      { name: "TOAST", type: "modifier" },
+      { name: "Chicken Tenders", qty: 3, type: "ingredient" },
+      { name: "Provolone Cheese", type: "ingredient" },
+      { name: "Buffalo Sauce", type: "ingredient" },
+      { name: "Ranch", type: "ingredient" },
+      { name: "Lettuce", type: "ingredient" }
+    ]
+  },
+  {
+    "itemName": "Breakfast Burrito",
+    ingredients: [
+      { name: "Tortilla", type: "ingredient" },
+      { name: "Scrambled Eggs", type: "ingredient" },
+      { name: "Sausage", type: "ingredient" },
+      { name: "Pepper Jack Cheese", type: "ingredient" },
+      { name: "Hash Browns", type: "ingredient" },
+      { name: "Boom Boom Sauce", type: "ingredient" },
+    ]
+  },
+  {
+    "itemName": "Hot Dog",
+    ingredients: [
+      { name: "Hot Dog Bun", type: "ingredient" },
+      { name: "Hot Dog", type: "ingredient" },
+      { name: "Chili", type: "ingredient" },
+      { name: "Onions", type: "ingredient" },
+      { name: "Mustard", type: "ingredient" }
+    ]
+  },
+  {
+    "itemName": "Homestyle Sandwich",
+    ingredients: [
+      { name: "Bun", type: "ingredient" },
+      { name: "TOAST", type: "modifier" },
+       { name: "Mayo", type: "ingredient" },
+      { name: "Homestyle Chicken", type: "ingredient" },
+      { name: "Pepper Jack Cheese", type: "ingredient" },
+      { name: "Lettuce", type: "ingredient" },
+      { name: "Tomato", type: "ingredient" }
+    ]
+  },
+  {
+    "itemName": "Quesadilla",
+    ingredients: [
+      { name: "Tortilla", type: "ingredient" },
+      { name: "SHRD Chicken", type: "ingredient" },
+      { name: "Shredded Cheddar", type: "ingredient" },
+      { name: "Peppers", type: "ingredient" },
+      { name: "Onions", type: "ingredient" }
+    ]
+  },
+  {
+    "itemName": "Mac & Cheese Bowl",
+    ingredients: [
+      { name: "Mac & Cheese", type: "ingredient" },
+      { name: "Send To Finisher", type: "tag" },
+      { name: "Buffalo Chicken", type: "ingredient" },
+      { name: "Ranch", type: "ingredient" }   
+    ]
+  },
+  {
+    "itemName": "Turkey Sub",
+    ingredients: [
+      { name: "Wheat Sub Roll", type: "ingredient" },
+      { name: "TOAST", type: "modifier" },
+      { name: "Turkey", type: "ingredient" },
+      { name: "Swiss Cheese", type: "ingredient" },
+      { name: "Lettuce", type: "ingredient" },
+      { name: "Tomato", type: "ingredient" },
+      { name: "Oil & Vinegar", type: "ingredient" }
+    ]
+  },
+  {
+    "itemName": "Breakfast Sandwich",
+    ingredients: [
+      { name: "Croissant", type: "ingredient" },
+      { name: "Egg", type: "ingredient" },
+      { name: "Bacon", type: "ingredient" },
+      { name: "American Cheese", type: "ingredient" },
+      { name: "Hash Brown Topper", type: "topper" },
+      {
+        type: "build",
+        name: "BUILD",
+        ingredients: [
+          "Croissant",
+          "Egg",
+          "American Cheese",
+          "Bacon",
+          "Hash Brown Patty"
+        ]
+      }
+    ]
+  }
+]
