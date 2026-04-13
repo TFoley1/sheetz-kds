@@ -1,15 +1,16 @@
 class Order {
-    constructor(orderNumber,items,deliverTo) {
-        this.orderNumber = orderNumber;
+    constructor(data) {
+        this.orderNumber = data.id;
         this.orderStartTime =  Date.now();
-        this.deliverTo = deliverTo;
-        this.items = items;
+        this.timer = "0:00";
+        this.deliverTo = data.deliverTo;
+        this.items = data.items;
         this.stationIndex = 0;
         this.active = true;
         this.isRinging = false;
         this.selected = false;
         this.completed = false;
-    } 
+    }
 
     bump() {
         // check in order container for if order is active && the station index, update while updating timers?

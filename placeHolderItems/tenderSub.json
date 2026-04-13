@@ -1,0 +1,12 @@
+{
+    "itemname": "Chicken Tender Sub",
+    "ingredients": [
+      { "name": "Sub Roll", "type": "ingredient" },
+      { "name": "TOAST", "type": "modifier" },
+      { "name": "Chicken Tenders", "qty": 3, "type": "ingredient" },
+      { "name": "Provolone Cheese", "type": "ingredient" },
+      { "name": "Buffalo Sauce", "type": "ingredient" },
+      { "name": "Ranch", "type": "ingredient" },
+      { "name": "Lettuce", "type": "ingredient" }
+    ]
+}

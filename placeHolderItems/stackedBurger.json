@@ -1,0 +1,22 @@
+{
+        "itemName": "Burger",
+        "ingredients": [
+            { "name": "Bun", "type": "ingredient" },
+            { "name": "TOAST", "type": "modifier" },
+            { "name": "Mayo", "type": "ingredient" },
+            { "name": "Stacked Burger", "qty": 2, "type": "ingredient" },
+            { "name": "Send To Finisher", "type": "tag" },
+            { "name": "American Cheese", "qty": 2, "type": "ingredient" },
+            {
+                "type": "build",
+                "name": "BUILD",
+                "ingredients": [
+                "Stacked Burger",
+                "American Cheese",
+                "Stacked Burger",
+                "American Cheese"
+                ]
+            },
+            { "name": "Lettuce", "type": "ingredient" }
+]
+        }

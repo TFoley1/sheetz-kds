@@ -1,8 +1,61 @@
 let selectedOrder;
 const STATIONS = ["starter", "finisher", "expo"];
 const activeOrders = [
-    {
-    "orderNumber": "850",
+//     {
+//     "orderNumber": "850",
+//     "timer":"0:00",
+//     "deliverTo":"Deliver To: Customer at Expo",
+//     items: [
+//         {
+//         "itemName": "Burger",
+//         ingredients: [
+//             { name: "Bun", type: "ingredient" },
+//             { name: "TOAST", type: "modifier" },
+//             { name: "Mayo", type: "ingredient" },
+//             { name: "Stacked Burger", qty: 2, type: "ingredient" },
+//             { name: "Send To Finisher", type: "tag" },
+//             { name: "American Cheese", qty: 2, type: "ingredient" },
+//             {
+//                 type: "build",
+//                 name: "BUILD",
+//                 ingredients: [
+//                 "Stacked Burger",
+//                 "American Cheese",
+//                 "Stacked Burger",
+//                 "American Cheese"
+//                 ]
+//             },
+//             { name: "Lettuce", type: "ingredient" }
+// ]
+//         },
+//         {
+//         "itemName": "Hot Dog",
+//         ingredients: [
+//             { name: "Hot Dog Bun", type: "ingredient" },
+//             { name: "Mustard", type: "ingredient" },
+//             { name: "Hot Dog", type: "ingredient"}
+//         ]
+//         }
+//     ]
+//     }
+]
+
+const inactiveOrders = [
+    
+];
+setInterval(() => {
+    let currentOrders = orderController.getActiveOrders();
+    // Every second check for...
+    updateAllOrderTimers(currentOrders);
+    currentOrders.forEach(order => {
+        // run some stuff that gotta be checked each order
+    });
+    renderOrders();
+
+}, 1000);
+
+let newOrder = new Order({
+    "id": "850",
     "timer":"0:00",
     "deliverTo":"Deliver To: Customer at Expo",
     items: [
@@ -37,21 +90,24 @@ const activeOrders = [
         ]
         }
     ]
-    }
-]
+    });
 
-const inactiveOrders = [
-    
-];
+    activeOrders.push(newOrder);
 
-function renderOrders() {
+let orderController = new OrderController(activeOrders);
+
+function renderOrders() { 
     const container = $("#orders-container");
     container.empty();
 
-  activeOrders.forEach(order => {
-    const orderCard = renderOrder(order);
-    $("#orders-container").append(orderCard);
-  });
+    orderController.orders.forEach(order => {
+        const orderCard = renderOrder(order);
+        $("#orders-container").append(orderCard);
+    }); 
+//   activeOrders.forEach(order => {
+//     const orderCard = renderOrder(order);
+//     $("#orders-container").append(orderCard);
+//   });
 
 }
 
@@ -134,7 +190,7 @@ function renderOrders() {
 // }
 
 document.addEventListener("DOMContentLoaded", function () {
-  renderOrders();
+  renderOrders(); 
 });
 
 $(document).ready(function(){
@@ -264,18 +320,22 @@ function renderOrder(order) {
     return orderCard;
 }
 
-// function updateAllOrderTimers() {
-//   const now = Date.now()
+function formatTime(totalSeconds) {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
 
-//   document.querySelectorAll('[data-order-id]').forEach(el => {
-//     const id = el.dataset.orderId
-//     const order = activeOrders.find(o => o.id == id)
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
 
-//     if (!order) return
-
-//     const elapsed = Math.floor((now - order.createdAt) / 1000)
-//     el.textContent = formatTime(elapsed)
-//   })
-// }
-
-// setInterval(updateAllOrderTimers, 1000);
+function updateAllOrderTimers(orders) {
+    // find time right now
+    const now = Date.now()
+    // find elapsed time
+    // find difference between order created and now
+    // format to seconds
+    // formate seconds to MM:SS
+    orders.forEach((order) => {
+        const elapsedSeconds = Math.floor((now - order.orderStartTime) / 1000);
+        order.timer = formatTime(elapsedSeconds);
+    });
+}

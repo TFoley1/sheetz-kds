@@ -1,0 +1,18 @@
+{
+    "itemname": "Quesadilla",
+    "ingredients": [
+        {
+            "type": "buildToast",
+            "name": "BUILD & TOAST",
+            "ingredients": [
+                "Tortilla",
+                [
+                    {"name": "SHRD Chicken", "qty": "1 Tan Scoop", "type": "ingredient"},
+                    {"name": "Shredded Cheddar", "qty": "2 Tan Scoops", "type": "ingredient"}
+                ],
+                "Peppers",
+                "Onions"
+            ]
+            }
+        ]
+  }

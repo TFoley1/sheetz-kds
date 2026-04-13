@@ -1,0 +1,12 @@
+{
+    "itemname": "Homestyle Chicken Sandwich",
+    "ingredients": [
+      { "name": "Bun", "type": "ingredient" },
+      { "name": "TOAST", "type": "modifier" },
+       { "name": "Mayo", "type": "ingredient" },
+      { "name": "Homestyle Chicken", "type": "ingredient" },
+      { "name": "Pepper Jack Cheese", "type": "ingredient" },
+      { "name": "Lettuce", "type": "ingredient" },
+      { "name": "Tomato", "type": "ingredient" }
+    ]
+  }

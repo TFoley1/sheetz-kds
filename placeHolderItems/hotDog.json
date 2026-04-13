@@ -1,0 +1,10 @@
+{
+    "itemname": "Hot Dog",
+    "ingredients": [
+      { "name": "Hot Dog Bun", "type": "ingredient" },
+      { "name": "Hot Dog", "type": "ingredient" },
+      { "name": "Chili", "type": "ingredient" },
+      { "name": "Onions", "type": "ingredient" },
+      { "name": "Mustard", "type": "ingredient" }
+    ]
+  }
