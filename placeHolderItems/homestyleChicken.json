@@ -1,5 +1,5 @@
 {
-    "itemname": "Homestyle Chicken Sandwich",
+    "itemName": "Homestyle Chicken Sandwich",
     "ingredients": [
       { "name": "Bun", "type": "ingredient" },
       { "name": "TOAST", "type": "modifier" },

@@ -1,5 +1,5 @@
 {
-    "itemname": "Quesadilla",
+    "itemName": "Quesadilla",
     "ingredients": [
         {
             "type": "buildToast",
@@ -7,12 +7,20 @@
             "ingredients": [
                 "Tortilla",
                 [
-                    {"name": "SHRD Chicken", "qty": "1 Tan Scoop", "type": "ingredient"},
-                    {"name": "Shredded Cheddar", "qty": "2 Tan Scoops", "type": "ingredient"}
+                    {
+                        "name": "SHRD Chicken",
+                        "qty": "1 Tan Scoop",
+                        "type": "ingredient"
+                    },
+                    {
+                        "name": "Shredded Cheddar",
+                        "qty": "2 Tan Scoops",
+                        "type": "ingredient"
+                    }
                 ],
                 "Peppers",
                 "Onions"
             ]
-            }
-        ]
-  }
+        }
+    ]
+}

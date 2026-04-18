@@ -1,5 +1,5 @@
 {
-    "itemname": "Chicken Tender Sub",
+    "itemName": "Chicken Tender Sub",
     "ingredients": [
       { "name": "Sub Roll", "type": "ingredient" },
       { "name": "TOAST", "type": "modifier" },

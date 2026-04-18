@@ -19,6 +19,5 @@ $(document).ready(function(){
 //     const data = await response.json();
 //     console.log(data); // Inspect this in browser console
 //   }
-//   loadJSON();
-
+//   loadJSON(); 
 }); 

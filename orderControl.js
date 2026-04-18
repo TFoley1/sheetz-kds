@@ -1,57 +1,22 @@
-let selectedOrder;
+let selectedOrder,isRinging = true;
 const STATIONS = ["starter", "finisher", "expo"];
+const dingSound = new Audio("audio/ding.mp3");
 const activeOrders = [
-//     {
-//     "orderNumber": "850",
-//     "timer":"0:00",
-//     "deliverTo":"Deliver To: Customer at Expo",
-//     items: [
-//         {
-//         "itemName": "Burger",
-//         ingredients: [
-//             { name: "Bun", type: "ingredient" },
-//             { name: "TOAST", type: "modifier" },
-//             { name: "Mayo", type: "ingredient" },
-//             { name: "Stacked Burger", qty: 2, type: "ingredient" },
-//             { name: "Send To Finisher", type: "tag" },
-//             { name: "American Cheese", qty: 2, type: "ingredient" },
-//             {
-//                 type: "build",
-//                 name: "BUILD",
-//                 ingredients: [
-//                 "Stacked Burger",
-//                 "American Cheese",
-//                 "Stacked Burger",
-//                 "American Cheese"
-//                 ]
-//             },
-//             { name: "Lettuce", type: "ingredient" }
-// ]
-//         },
-//         {
-//         "itemName": "Hot Dog",
-//         ingredients: [
-//             { name: "Hot Dog Bun", type: "ingredient" },
-//             { name: "Mustard", type: "ingredient" },
-//             { name: "Hot Dog", type: "ingredient"}
-//         ]
-//         }
-//     ]
-//     }
 ]
 
 const inactiveOrders = [
     
 ];
+
 setInterval(() => {
     let currentOrders = orderController.getActiveOrders();
     // Every second check for...
-    updateAllOrderTimers(currentOrders);
-    currentOrders.forEach(order => {
-        // run some stuff that gotta be checked each order
-    });
-    renderOrders();
-
+    //updateAllOrderTimers(currentOrders);
+    // currentOrders.forEach(order => {
+        
+    // });
+    //renderOrders();
+    syncOrders();
 }, 1000);
 
 let newOrder = new Order({
@@ -91,6 +56,8 @@ let newOrder = new Order({
         }
     ]
     });
+
+    
 
     activeOrders.push(newOrder);
 
@@ -190,51 +157,60 @@ function renderOrders() {
 // }
 
 document.addEventListener("DOMContentLoaded", function () {
-  renderOrders(); 
+  //renderOrders(); 
 });
 
 $(document).ready(function(){
 
-    $("#bump-btn").click(function() {
-        // Selected Order gets saved to inactive order list at the beginning
-            // Find order based on #
-            // unshift or add to beginning
-            //inactiveOrders.unshift();
-        // Selected order gets removed from screen
-        selectedOrder.remove();
+    $("#bump-btn").click(function () {
+        const currentStation = getCurrentStation();
+        const selected = orderController.orders.find(order => order.selected);
+
+        if (!selected || selected.getStationState(currentStation) !== "active") {
+            return;
+        }
+
+        selected.bump();
+        syncOrders();
     });
-    let selectedOrder = null;
 
-$(".order").click(function (e) {
-    e.stopPropagation(); // 🔥 prevents body click from firing
+    $("#bellIcon").click(function(){
+        $("#bellIcon").hide();
+        dingSound.stop();
+        isRinging = false;
+    });
 
-    // If clicking the same order → deselect it
-    if (selectedOrder && selectedOrder.is($(this))) {
-        selectedOrder.css("background-color", "rgb(8,8,8)");
-        selectedOrder = null;
-        return;
-    }
+    $("#orders-container").on("click", ".order", function (event) {
+        event.stopPropagation();
 
-    // Reset previous selection
-    $(".order").css("background-color", "rgb(8,8,8)");
+        const orderId = this.dataset.orderId;
+        const order = orderController.getOrderById(orderId);
+        const currentStation = getCurrentStation();
+        order.isRinging = false;
 
-    // Set new selection
-    selectedOrder = $(this);
-    selectedOrder.css("background-color", "rgb(25,25,25)");
-});
+        if (!order || order.getStationState(currentStation) !== "active") {
+            return;
+        }
 
-$(document).click(function () {
-    if (selectedOrder) {
-        selectedOrder.css("background-color", "rgb(8,8,8)");
-        selectedOrder = null;
-    }
-});
+        orderController.orders.forEach(o => {
+            o.selected = o.orderNumber === order.orderNumber ? !o.selected : false;
+            o.lastRenderState = null;
+        });
+
+        syncOrders();
+    });
+
+// $(document).click(function () {
+//     if (selectedOrder) {
+//         selectedOrder.css("background-color", "rgb(8,8,8)");
+//         selectedOrder = null;
+//     }
+// });
 
     
 }); 
 
 function renderIngredient(ingredient) {
-    let buildItems = "";
      if (ingredient.type === "modifier") {
             return `<li class="bg-amber-800 font-bold text-center rounded-md">${ingredient.name}</li>`;
         }
@@ -250,8 +226,9 @@ function renderIngredient(ingredient) {
         // }
         if (ingredient.type === "build") {
             let buildItems = "";
+
             ingredient.ingredients.forEach(i => {
-                buildItems += `<li>${i}</li>`;
+                buildItems += `<li>${i}</li>`; // for more complex builds a render special modifier function will be needed
             });
             return `
             <li>
@@ -270,7 +247,15 @@ function renderIngredient(ingredient) {
         }
 }
 
-function renderItem(item) {
+function renderItem(item,station) {
+    if (station === "expo") {
+        return `
+            <div class="border-b-2 p-2 text-xl font-bold">
+                ${item.itemName}
+            </div>
+        `; //       ^ later will need to add quantity of items
+    }
+
     let ingredientsHTML = "";
 
 
@@ -278,72 +263,97 @@ function renderItem(item) {
         ingredientsHTML += renderIngredient(ingredient);
     });
     return `<div class="flex-1">
-      <h2 class="text-lg font-bold border-dashed border-b-2 p-1">
+      <h2 class="text-3xl font-bold border-dashed border-b-2 p-1 mt-2">
         ${item.itemName}
       </h2>
 
-      <ul class="inline-block text-base p-2">
+      <ul class="inline-block text-2xl p-2">
         ${ingredientsHTML}
       </ul>
     </div>`;
 }
 
-function renderOrder(order) {
+function renderOrder(order,station) {
+
+    
     const orderCard = document.createElement("div");
+    const visibleItems = order.getVisibleItems(station);
+    const headerClass = getHeaderClass(order.getAlertLevel());
 
     orderCard.classList.add(
         "order",
         "relative",
         "border-3",
-        "rounded-md",
-        "col-span-2"
+        "rounded-2xl",
+        "col-span-2",
+        "h-full",
+        "w-full"
     );
+
+    if (order.selected) {
+        orderCard.classList.add("bg-neutral-900");
+    }
+
+    if (order.getStationState(station) == "preview") {
+        orderCard.classList.add("opacity-45");
+    }
+    orderCard.dataset.orderId = order.orderNumber;
 
     let itemsHTML = "";
 
-    order.items.forEach(item => {
-        itemsHTML += renderItem(item);
+    visibleItems.forEach(item => {
+        itemsHTML += renderItem(item, station);
     });
-    // add if for beginning of innerHTML to change the color if order.timer is  < 3 min as well as < 5 min
-    if (order.getElapsedTime() >= 180) {
+
+    let bodyClass;
+    if (station === "expo") {
+        bodyClass = "grid grid-cols-1 gap-2 p-3";
+    } else {
+        bodyClass = "flex flex-row gap-4";
+    }
+    if (order.deliverTo.includes("DoorDash")) {
         orderCard.innerHTML = `
-        <div class="grid grid-cols-3 gap-4 bg-yellow-700 border-b-3 p-2">
-            <h3 class="text-xl font-bold">Order #${order.orderNumber}</h3>
-            <h3 class="text-2xl font-bold text-center">${order.timer}</h3>
-            <h3 class="text-sm font-bold text-center">${order.deliverTo}</h3>
+        <div class="grid grid-cols-3 gap-4 ${headerClass} rounded-xl items-center justify-center ">
+            <h3 class="text-3xl font-bold">Order #${order.orderNumber}</h3>
+            <h3 class="text-5xl font-bold text-center" data-role="timer">${order.timer}</h3>
+            <div class="flex items-center justify-center gap-2 rounded-md bg-[#ff3008] px-3 py-2">
+                <span class="text-xl font-bold">${order.deliverTo}</span>	
+                <img class="h-16 w-auto" src="img/DD-LOGO.png" alt="DoorDash logo">
+            </div>
         </div>
 
-        <div class="flex flex-row gap-4">
+        <div class="${bodyClass}">
         ${itemsHTML}
         </div>
-    `; 
-    }
-    else if (order.getElapsedTime() >= 300) {
+    `;
+    } else if (order.deliverTo.includes("Online")) {
         orderCard.innerHTML = `
-        <div class="grid grid-cols-3 gap-4 bg-red-700 border-b-3 p-2">
-            <h3 class="text-xl font-bold">Order #${order.orderNumber}</h3>
-            <h3 class="text-2xl font-bold text-center">${order.timer}</h3>
-            <h3 class="text-sm font-bold text-center">${order.deliverTo}</h3>
+        <div class="grid grid-cols-3 gap-4 ${headerClass} rounded-xl items-center justify-center ">
+            <h3 class="text-3xl font-bold">Order #${order.orderNumber}</h3>
+            <h3 class="text-5xl font-bold text-center" data-role="timer">${order.timer}</h3>
+            <div class="flex items-center bg-fuchsia-900 justify-center gap-2 rounded-md px-3 py-3">
+	            <span class="text-xl font-bold text-center">${order.deliverTo}</span>
+            </div>
         </div>
 
-        <div class="flex flex-row gap-4">
+        <div class="${bodyClass}">
         ${itemsHTML}
         </div>
-    `; 
-    }
-    else {
+    `;
+    } else
         orderCard.innerHTML = `
-        <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2">
-            <h3 class="text-xl font-bold">Order #${order.orderNumber}</h3>
-            <h3 class="text-2xl font-bold text-center">${order.timer}</h3>
-            <h3 class="text-sm font-bold text-center">${order.deliverTo}</h3>
+        <div class="grid grid-cols-3 gap-4 ${headerClass} rounded-xl items-center justify-center ">
+            <h3 class="text-3xl font-bold">Order #${order.orderNumber}</h3>
+            <h3 class="text-5xl font-bold text-center" data-role="timer">${order.timer}</h3>
+            <div class="flex items-center bg-stone-500 justify-center gap-2 rounded-md px-3 py-3">
+	            <span class="text-xl font-bold text-center">${order.deliverTo}</span>
+            </div>
         </div>
 
-        <div class="flex flex-row gap-4">
+        <div class="${bodyClass}">
         ${itemsHTML}
         </div>
-    `; 
-    }
+    `;
     
 
     return orderCard;
@@ -368,3 +378,100 @@ function updateAllOrderTimers(orders) {
         order.timer = formatTime(elapsedSeconds);
     });
 }
+
+
+function syncOrders() {
+
+    
+    const currentStation = getCurrentStation();
+    const container = $("#orders-container");
+    const visibleOrderIds = new Set();
+    //const currentOrders = orderController.getActiveOrders();
+    // const currentOrders = orderController.getActiveOrders().filter(order => {
+    //     return STATIONS[order.stationIndex] === currentStation;
+    // });
+    const currentOrders = orderController.getActiveOrders().filter(order => {
+        return order.getStationState(currentStation) !== "done";
+    });
+
+
+    updateAllOrderTimers(currentOrders);
+    $("#orderTotal").html(`${orderController.getTotalOrders() } Orders`);
+    $("#clockTime").html(` 4:40pm`);
+
+    if (currentStation === "starter" ) {
+        let orderNum = orderController.getTotalOrders();
+        if (orderNum > 0 && isRinging) {
+            $("#bellIcon").show();
+            playOrderNotification();
+        } 
+    }
+
+    currentOrders.forEach(order => {
+        visibleOrderIds.add(String(order.orderNumber));
+
+        const existingCard = document.querySelector(
+            `[data-order-id="${order.orderNumber}"]`
+        );
+
+        if (existingCard == null) {
+            const newCard = renderOrder(order, currentStation);
+            container.append(newCard);
+            order.saveRenderState(currentStation);
+            return;
+        }
+
+        if (order.shouldRerender(currentStation)) {
+            const newCard = renderOrder(order, currentStation);
+            existingCard.replaceWith(newCard);
+            order.saveRenderState(currentStation);
+            return;
+        }
+
+        const timerElement = existingCard.querySelector(`[data-role="timer"]`);
+
+        if (timerElement) {
+            timerElement.textContent = order.timer;
+        }
+    });
+
+    document.querySelectorAll("[data-order-id]").forEach(card => {
+        const orderId = card.dataset.orderId;
+
+        if (!visibleOrderIds.has(orderId)) {
+            card.remove();
+        }
+    });
+}
+
+
+function getHeaderClass(alertLevel) {
+    if (alertLevel === "danger") {
+        return "bg-red-600";
+    }
+
+    if (alertLevel === "warning") {
+        return "bg-yellow-700";
+    }
+
+    return "bg-green-700";
+}
+
+function getCurrentStation() {
+    const pageName = window.location.pathname.split("/").pop();
+
+    if (pageName === "finisher.html") {
+        return "finisher";
+    }
+
+    if (pageName === "expo.html") {
+        return "expo";
+    }
+
+    return "starter";
+}
+
+function playOrderNotification() {
+    dingSound.play();
+}
+

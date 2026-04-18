@@ -1,5 +1,5 @@
 {
-    "itemname": "Breakfast Burrito",
+    "itemName": "Breakfast Burrito",
     "ingredients": [
         { "name": "Tortilla", "type": "ingredient" },
         { "name": "Scrambled Eggs", "type": "ingredient" },
@@ -9,4 +9,4 @@
         { "name": "Hash Browns", "type": "ingredient" },
         { "name": "Boom Boom Sauce", "type": "ingredient" }
     ]
-  }
+}

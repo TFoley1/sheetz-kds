@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <!-- <script src="order.js"></script>
+    <script src="orderController.js"></script>
+    <script src="orderControl.js"></script> -->
+    <link rel="stylesheet" href="style.css">
+    <title>Freak KDS - Stater</title>
+</head>
+<body>
+
+<!-- Modal for Switching Stations -->
+<div class="fixed inset-0 z-40 flex items-center justify-center" id="switch-station-modal">
+
+  <!-- Background Overlay -->
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
+
+  <!-- Content (When adding new stations update columns)-->
+  <div class="relative grid grid-cols-3 gap-2 text-center text-lg bg-neutral-900 p-4 rounded-lg shadow-xl">
+    <a href="starter.html"><div class="w-36 h-12 bg-neutral-400 rounded-md flex items-center justify-center text-3xl cursor-pointer">STARTER</div></a>
+    <a href="finisher.html"><div class="w-36 h-12 bg-neutral-400 rounded-md flex items-center justify-center text-3xl cursor-pointer">FINISHER</div></a>
+    <!-- <div class="w-36 h-12 bg-neutral-400 rounded-md flex items-center justify-center text-3xl cursor-pointer">FRYER</div>
+     <div class="w-36 h-12 bg-neutral-400 rounded-md flex items-center justify-center text-3xl cursor-pointer">SBC</div> -->
+    <a href="expo.html"><div class="w-36 h-12 bg-neutral-400 rounded-md flex items-center justify-center text-3xl cursor-pointer">EXPO</div> </a>
+  </div>
+</div>
+
+<div id="main-container" class="grid grid-cols-4">
+
+  <div class="flex items-center ">
+    <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute bottom-30 text-center"><p class="text-xl">Recall Order</p></div>
+    <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute bottom-5 text-center cursor-pointer" id="bump-btn"""><p class="text-xl">Bump Order</p></div>
+    <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute text-center cursor-pointer bottom-55" id="switch-station-btn"><p class="text-xl">Switch Station</p></div>
+  </div>
+  
+  
+  <div id="orders-container" class="grid grid-cols-2 gap-4 col-span-2">
+    
+
+
+  <div class="order relative col-span-2 m-1 bg-neutral-950 border-4 rounded-xl"  data-order-id="850">
+        <div class="grid grid-cols-3 gap-4 bg-green-700 rounded-xl items-center justify-center">
+            <h3 class="text-4xl font-bold text-center">Order #850</h3>
+            <h3 class="text-5xl font-bold text-center" data-role="timer">02:41</h3>
+            <div class="flex items-center bg-fuchsia-900 justify-center gap-2 rounded-md px-3 py-3">
+	            <span class="text-xl font-bold text-center">Deliver To: Online Pickup Rack</span>
+            </div>
+            <!-- <div class="bg-[#ff3008] rounded-md align-baseline inline">
+                <h3 class="text-lg font-bold text-center">DoorDash Delivery</h3>
+                <img class="inline h-10 align-right" src="img/DD-LOGO.png">
+            </div> -->
+        </div>
+
+        <div class="flex flex-row gap-4">
+        <div class="flex-1">
+            <h2 class="text-3xl font-bold border-dashed border-b-2 p-1 mt-2">
+                Burger
+            </h2>
+
+            <ul class="inline-block text-2xl p-2">
+                <li>Bun</li><li class="bg-amber-800 font-bold text-center rounded-md">TOAST</li><li>Mayo</li><li>Stacked Burger - 2</li><li class="bg-lime-700 font-bold text-center rounded-md">Send To Finisher</li><li>American Cheese - 2</li>
+                    <li>
+                        <ul class="bg-amber-800 rounded-md p-1">
+                        <li class="font-bold text-center">BUILD</li>
+                        <li>Stacked Burger</li><li>American Cheese</li><li>Stacked Burger</li><li>American Cheese</li>
+                        </ul>
+                    </li><li>Lettuce</li>
+            </ul>
+        </div>
+        <div class="flex-1">
+            <h2 class="text-3xl font-bold border-dashed border-b-2 p-1 mt-2">
+                Hot Dog
+            </h2>
+
+            <ul class="inline-block text-2xl p-2">
+                <li>Hot Dog Bun</li><li>Mustard</li><li>Hot Dog</li>
+            </ul>
+            </div>
+        </div>
+    </div>
+
+        <div class="order relative border-3 rounded-md" data-order-id="850">
+        <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3">
+            <h3 class="text-3xl font-bold">Order #850</h3>
+            <h3 class="text-5xl font-bold text-center" data-role="timer">02:41</h3>
+            <div class="bg-stone-500 rounded-md ">
+                <h3 class="text-xl font-bold text-center">Deliver To: Customer at Expo</h3>
+            </div>
+        </div>
+
+        <div class="flex flex-row gap-4">
+        <div class="flex-1">
+        <h2 class="text-3xl font-bold border-dashed border-b-2 p-1 mt-2">
+            Hot Dog
+        </h2>
+
+        <ul class="inline-block text-2xl p-2">
+            <li>Hot Dog Bun</li><li>Mustard</li><li>Hot Dog</li>
+        </ul>
+        </div>
+        </div>
+        </div>
+    </div>
+
+    
+ 
+  <div class="flex flex-col items-center h-screen">
+    <div>
+      <p class="text-center text-xl">Orders</p>
+      <p class="text-center text-xl">04:30Pm</p>
+    </div>
+    
+    <div>
+      <pre class="text-center text-xl">#649  6 Mins✅</pre>
+      <hr>
+      <pre class="text-center text-xl">#651  6 Mins</pre>
+      <hr>
+      <pre class="text-center text-xl">#649  6 Mins✅</pre>
+      <hr>
+      <pre class="text-center text-xl">#649 6 Mins✅</pre>
+      <hr>
+      <pre class="text-center text-xl">#649       6 Mins</pre>
+      <hr>
+    </div>
+    
+    <div class="absolute bottom-50">
+      <div class="flex items-center h-40 w-40 rounded-full border-5 border-green-600 text-center">
+        <p class="text-lg  w-full font-bold">Freak Status!</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

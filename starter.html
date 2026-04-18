@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="script.js"></script>
     <script src="order.js"></script>
     <script src="orderController.js"></script>
     <script src="orderControl.js"></script>
+    <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="freakIcon.ico">
     <title>Freak KDS - Stater</title>
 </head>
 <body>
@@ -29,6 +30,10 @@
     <a href="expo.html"><div class="w-36 h-12 bg-neutral-400 rounded-md flex items-center justify-center text-3xl cursor-pointer">EXPO</div> </a>
   </div>
 </div>
+
+  <div id="bellIcon" class="fixed inset-0 z-40 flex grid h-screen place-items-center h-64 z-60 opacity-50">
+      <img src="img/bell-icon.png" class="h-96 w-96">
+  </div>
 
 <div id="main-container" class="grid grid-cols-4">
 
@@ -150,8 +155,8 @@
  
   <div class="flex flex-col items-center h-screen">
     <div>
-      <p class="text-center text-xl">Orders</p>
-      <p class="text-center text-xl">04:30Pm</p>
+      <p class="text-center text-xl" id="orderTotal">Orders</p>
+      <p class="text-center text-xl" id="clockTime">04:30Pm</p>
     </div>
     
     <div>
@@ -166,6 +171,8 @@
       <pre class="text-center text-xl">#649       6 Mins</pre>
       <hr>
     </div>
+
+    
     
     <div class="absolute bottom-50">
       <div class="flex items-center h-40 w-40 rounded-full border-5 border-green-600 text-center">

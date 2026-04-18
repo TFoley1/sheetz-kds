@@ -1,5 +1,5 @@
 {
-    "itemname": "Hot Dog",
+    "itemName": "Hot Dog",
     "ingredients": [
       { "name": "Hot Dog Bun", "type": "ingredient" },
       { "name": "Hot Dog", "type": "ingredient" },

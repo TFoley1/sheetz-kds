@@ -1,16 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+    --DoorDashOrange: #ff3008; 
+    --color-midnight: #121063;
+    --color-tahiti: #3ab7bf;
+    --color-bermuda: #78dcca;
+}
+
 body {
     background-color: rgb(4, 4, 4);
     color:white;
+    margin: 0px;
+    padding:0px;
 }
 
 .order{
-    background-color: rgb(8, 8, 8);
+    /* background-color: rgb(8, 8, 8); */
+    user-select: none;
 }
 
 .order li{
    list-style-type: none; 
 }
 
+
 .bump-btn  {
-    display:hidden;
 }
+
