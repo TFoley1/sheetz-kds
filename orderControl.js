@@ -176,7 +176,6 @@ $(document).ready(function(){
 
     $("#bellIcon").click(function(){
         $("#bellIcon").hide();
-        dingSound.stop();
         isRinging = false;
     });
 
@@ -472,6 +471,7 @@ function getCurrentStation() {
 }
 
 function playOrderNotification() {
+
     dingSound.play();
 }
 
