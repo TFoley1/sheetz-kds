@@ -19,49 +19,8 @@ setInterval(() => {
     syncOrders();
 }, 1000);
 
-let newOrder = new Order({
-    "id": "850",
-    "timer":"0:00",
-    "deliverTo":"Deliver To: Customer at Expo",
-    items: [
-        {
-        "itemName": "Burger",
-        ingredients: [
-            { name: "Bun", type: "ingredient" },
-            { name: "TOAST", type: "modifier" },
-            { name: "Mayo", type: "ingredient" },
-            { name: "Stacked Burger", qty: 2, type: "ingredient" },
-            { name: "Send To Finisher", type: "tag" },
-            { name: "American Cheese", qty: 2, type: "ingredient" },
-            {
-                type: "build",
-                name: "BUILD",
-                ingredients: [
-                "Stacked Burger",
-                "American Cheese",
-                "Stacked Burger",
-                "American Cheese"
-                ]
-            },
-            { name: "Lettuce", type: "ingredient" }
-]
-        },
-        {
-        "itemName": "Hot Dog",
-        ingredients: [
-            { name: "Hot Dog Bun", type: "ingredient" },
-            { name: "Mustard", type: "ingredient" },
-            { name: "Hot Dog", type: "ingredient"}
-        ]
-        }
-    ]
-    });
-
-    
-
-    activeOrders.push(newOrder);
-
 let orderController = new OrderController(activeOrders);
+// orderController.injectRandomOrder();
 
 function renderOrders() { 
     const container = $("#orders-container");
@@ -171,6 +130,7 @@ $(document).ready(function(){
         }
 
         selected.bump();
+        orderController.save();
         syncOrders();
     });
 
@@ -395,8 +355,8 @@ function syncOrders() {
 
 
     updateAllOrderTimers(currentOrders);
-    $("#orderTotal").html(`${orderController.getTotalOrders() } Orders`);
-    $("#clockTime").html(` 4:40pm`);
+        $("#orderTotal").html(`${orderController.getTotalOrders() } Orders`);
+        $("#clockTime").html(` 4:40pm`);
 
     if (currentStation === "starter" ) {
         let orderNum = orderController.getTotalOrders();
@@ -425,8 +385,9 @@ function syncOrders() {
             existingCard.replaceWith(newCard);
             order.saveRenderState(currentStation);
             return;
+            
         }
-
+        
         const timerElement = existingCard.querySelector(`[data-role="timer"]`);
 
         if (timerElement) {

@@ -87,12 +87,14 @@ class Order {
 
     shouldRerender(station) {
         const nextState = this.getRenderState(station);
+        if (this.needsRender) {
+            return true;
+        }
 
         if (!this.lastRenderState) return true;
         if (this.lastRenderState.alertLevel !== nextState.alertLevel) return true;
         if (this.lastRenderState.selected !== nextState.selected) return true;
         if (this.lastRenderState.station !== nextState.station) return true;
-
         if (this.lastRenderState.visibleItems.length !== nextState.visibleItems.length) {
             return true;
         }
@@ -112,6 +114,7 @@ class Order {
 
     saveRenderState(station) {
         this.lastRenderState = this.getRenderState(station);
+        this.needsRender = false;
     }
 
 }

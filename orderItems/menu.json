@@ -1,0 +1,13 @@
+[
+    "orderItems/bbqBrisketNachos.json",
+    "orderItems/breakfastBurrito.json",
+    "orderItems/homestyleChicken.json",
+    "orderItems/grilledCheese.json",
+    "orderItems/hotDog.json",
+    "orderItems/pepperoniPizza.json",
+    "orderItems/pizzaPretzel.json",
+    "orderItems/saltedPretzel.json",
+    "orderItems/stackedBurger.json",
+    "orderItems/streetTacos.json",
+    "orderItems/tenderSub.json"
+]

@@ -1,0 +1,12 @@
+{
+    "itemName": "Beef Street Tacos - 3 Pack",
+    "ingredients": [
+        { "name": "5 Inch Tortilla", "type": "ingredient" },
+        { "name": "Beef", "type": "ingredient" },
+        { "name": "Send To Finisher", "type": "tag" },
+        { "name": "Shredded Cheddar", "type": "ingredient" },
+        { "name": "Lettuce", "type": "ingredient" },
+        { "name": "Pico", "type": "ingredient" },
+        { "name": "Boom Boom Sauce", "type": "ingredient" }
+    ]
+}

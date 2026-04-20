@@ -1,0 +1,15 @@
+{
+    "itemName": "Pepperoni Pizza",
+    "ingredients": [
+      {
+                "type": "build",
+                "name": "BUILD & TOAST",
+                "ingredients": [
+                "Flatbread",
+                "Marinara Sauce",
+                "Parmesean Cheese",
+                "Mozzarella Cheese"
+                ]
+      }
+    ]
+  }

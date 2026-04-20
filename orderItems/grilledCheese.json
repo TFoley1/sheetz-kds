@@ -1,0 +1,15 @@
+{
+    "itemName": "Grilled Cheese",
+    "ingredients": [
+        {
+                "type": "build",
+                "name": "BUILD & TOAST",
+                "ingredients": [
+                "Sourdough",
+                "American Cheese - 4",
+                "Sourdough",
+                "Brush w/ Oil"
+                ]
+      }
+    ]
+}

@@ -14,10 +14,17 @@ $(document).ready(function(){
        // Let user click links to stations
     });
 
-//   async function loadJSON() {
-//     const response = await fetch('quesadilla.json');
-//     const data = await response.json();
-//     console.log(data); // Inspect this in browser console
-//   }
-//   loadJSON(); 
+    $("#add-order-btn").click(function() {
+      orderController.injectRandomOrder();
+    });
+
+   orderController.load();
 }); 
+
+
+window.addEventListener("storage", (e) => {
+   if (e.key === "kds_orders") {
+      orderController.load();
+      syncOrders();
+   }
+   });

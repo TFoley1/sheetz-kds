@@ -1,0 +1,8 @@
+{
+    "itemName": "Salted Pretzel",
+    "ingredients": [
+        { "name": "Pretzel", "type": "ingredient" },
+        { "name": "TOAST", "type": "modifier" },
+        { "name": "Garnish w/salt", "type": "tag" }
+    ]
+}
