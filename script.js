@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    $("#switch-station-modal").hide();
-    $("#menu-modal").hide();
+    $("#switch-popup").hide();
+    $("#dev-popup").hide();
     $("#volume-modal").hide();
     $("#mute-icon").hide();
     //$("#bell-icon").hide();
@@ -9,21 +9,29 @@ $(document).ready(function(){
 
     $("#switch-station-btn").click(function() {
        // Show options for stations to switch to
-       $("#switch-station-modal").show();
+       $("#switch-popup").show();
        // Let user click links to stations
     });
 
-    $("#menu-btn").click(function() {
+    $("#switch-popup").click(function() {
        // Show options for stations to switch to
-       $("#menu-modal").show();
+       $("#switch-popup").hide();
        // Let user click links to stations
     });
 
-    $("#menu-modal").click(function() {
+    $("#dev-btn").click(function() {
        // Show options for stations to switch to
-       $("#menu-modal").hide();
+       $("#dev-popup").show();
        // Let user click links to stations
     });
+
+    $("#dev-popup").click(function() {
+       // Show options for stations to switch to
+       $("#dev-popup").hide();
+       // Let user click links to stations
+    });
+
+    // btns
 
     $("#volume-btn").click(function() {
        // Show options for stations to switch to
@@ -48,6 +56,7 @@ $(document).ready(function(){
     });
 
 
+   
    orderController.load();
 }); 
 
@@ -58,3 +67,16 @@ window.addEventListener("storage", (e) => {
       syncOrders();
    }
    });
+
+   function updateClock() {
+    const now = new Date();
+    const time = now.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    $("#clock-time").html(time);
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+

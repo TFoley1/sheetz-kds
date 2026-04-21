@@ -71,13 +71,24 @@ $(document).ready(function(){
         dingSound.volume = Number(this.value);
     });
 
-    // Mute
+    // // On load
+    // isMuted = localStorage.getItem("isMuted") === "true";
+    // dingSound.muted = isMuted;
+    // if (isMuted) {
+    //     $("#muted-icon").show();
+    //     $("#mute-icon").hide();
+    // } else {
+    //     $("#muted-icon").show();
+    //     $("#mute-icon").hide();
+    // }
 
+    // Mute
     $("#muted-icon").click(function(){
-      $("#mute-icon").show();
-      $("#muted-icon").hide();
-      isMuted = !isMuted;
-      dingSound.muted = isMuted;
+        $("#mute-icon").show();
+        $("#muted-icon").hide();
+        isMuted = !isMuted;
+        dingSound.muted = isMuted;
+        localStorage.setItem("isMuted", isMuted);
     });
 
     $("#mute-icon").click(function(){
@@ -85,7 +96,7 @@ $(document).ready(function(){
       $("#mute-icon").hide();
       isMuted = !isMuted;
       dingSound.muted = isMuted;
-      
+      localStorage.setItem("isMuted", isMuted);
     });
     
 }); 
@@ -206,6 +217,7 @@ function renderItem(item,station) {
             </div>
         `; //       ^ later will need to add quantity of items
     }
+    
 
     let ingredientsHTML = "";
 
@@ -213,15 +225,29 @@ function renderItem(item,station) {
     item.ingredients.forEach(ingredient => {
         ingredientsHTML += renderIngredient(ingredient);
     });
-    return `<div class="flex-1">
-      <h2 class="text-3xl font-bold border-dashed border-b-2 p-1 mt-2">
+
+    if (item.qty != null || item.qty > 1) {
+        return `<div class="flex-1">
+    <span class="block text-3xl font-bold border-dashed border-b-2 p-1 mt-2">
         ${item.itemName}
-      </h2>
+        <span class="rounded-sm bg-slate-600">Qty - ${item.qty}</span>
+    </span>
 
       <ul class="inline-block text-2xl p-2">
         ${ingredientsHTML}
       </ul>
     </div>`;
+    }
+    return `<div class="flex-1">
+    <span class="block text-3xl font-bold border-dashed border-b-2 p-1 mt-2">
+        ${item.itemName}
+    </span>
+
+      <ul class="inline-block text-2xl p-2">
+        ${ingredientsHTML}
+      </ul>
+    </div>`;
+    
 }
 
 function renderOrder(order,station) {

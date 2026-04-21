@@ -1,5 +1,6 @@
 {
     "itemName": "Hot Dog",
+    "qty": 2,
     "ingredients": [
       { "name": "Hot Dog Bun", "type": "ingredient" },
       { "name": "Hot Dog", "type": "ingredient" },
