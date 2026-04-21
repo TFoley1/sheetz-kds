@@ -1,3 +1,4 @@
+let devBtnClicks = 0;
 $(document).ready(function(){
     $("#switch-popup").hide();
     $("#dev-popup").hide();
@@ -21,7 +22,14 @@ $(document).ready(function(){
 
     $("#dev-btn").click(function() {
        // Show options for stations to switch to
-       $("#dev-popup").show();
+       devBtnClicks++;
+       if (devBtnClicks % 2 == 1) {
+         $("#dev-popup").show();
+       } else {
+         $("#dev-popup").hide();
+         $("#switch-popup").hide();
+       }
+       
        // Let user click links to stations
     });
 
