@@ -11,12 +11,13 @@ class Order {
         // this.station = "starter";
 
         this.stationIndex = data.stationIndex ?? 0;
-        this.active = true;
-        this.isRinging = true;
-        this.selected = false;
-        this.completed = false;
-        this.needsRender = false;
-        this.lastRenderState = null;
+        this.active = data.active ?? true;
+        this.isRinging = data.isRinging ?? true;
+        this.selected = data.selected ?? false;
+        this.completed = data.completed ?? false;
+        this.needsRender = data.needsRender ?? false;
+        this.lastRenderState = data.lastRenderState ?? null;
+
     }
 
     bump() {

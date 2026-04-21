@@ -3,7 +3,7 @@
     "ingredients": [
         { "name": "Nacho Chips", "type": "ingredient" },
         { "name": "Scrambled Eggs", "type": "ingredient" },
-        { "name": "Sausage", "type": "ingredient","qty": 2  },
+        { "name": "Sausage", "type": "ingredient","portion": "1 Red Scoop"  },
         { "name": "Send To Finisher", "type": "tag" },
         { "name": "Pepper Jack Cheese", "type": "ingredient" },
         { "name": "Hash Browns", "type": "ingredient" },

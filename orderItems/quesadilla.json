@@ -2,24 +2,22 @@
     "itemName": "Quesadilla",
     "ingredients": [
         {
-            "type": "buildToast",
+            "type": "build",
             "name": "BUILD & TOAST",
             "ingredients": [
-                "Tortilla",
-                [
-                    {
-                        "name": "SHRD Chicken",
-                        "portion": "1 Tan Scoop",
-                        "type": "ingredient"
-                    },
-                    {
-                        "name": "Shredded Cheddar",
-                        "portion": "2 Tan Scoops",
-                        "type": "ingredient"
-                    }
-                ],
-                "Peppers",
-                "Onions"
+                { "name": "Tortilla", "type": "ingredient" },
+                {
+                    "name": "SHRD Chicken",
+                    "portion": "1 Tan Scoop",
+                    "type": "ingredient"
+                },
+                {
+                    "name": "Shredded Cheddar",
+                    "portion": "2 Tan Scoops",
+                    "type": "ingredient"
+                },
+                { "name": "Peppers", "type": "ingredient" },
+                { "name": "Onions", "type": "ingredient" }
             ]
         }
     ]

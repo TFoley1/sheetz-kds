@@ -1,4 +1,10 @@
-let selectedOrder,isRinging = true;
+let selectedOrder;
+let isMuted = true;
+let lastStarterOrderTime = 0;
+let lastStarterOrderCount = 0;
+let starterOrderCount = 0;
+let starterOrdersLoaded = false;
+let bellSoundInterval = null;
 const STATIONS = ["starter", "finisher", "expo"];
 const dingSound = new Audio("audio/ding.mp3");
 const activeOrders = [
@@ -10,12 +16,6 @@ const inactiveOrders = [
 
 setInterval(() => {
     let currentOrders = orderController.getActiveOrders();
-    // Every second check for...
-    //updateAllOrderTimers(currentOrders);
-    // currentOrders.forEach(order => {
-        
-    // });
-    //renderOrders();
     syncOrders();
 }, 1000);
 
@@ -30,94 +30,7 @@ function renderOrders() {
         const orderCard = renderOrder(order);
         $("#orders-container").append(orderCard);
     }); 
-//   activeOrders.forEach(order => {
-//     const orderCard = renderOrder(order);
-//     $("#orders-container").append(orderCard);
-//   });
-
 }
-
-// // Take JSON and turn it into HTML & Tailwind
-// function renderOrders() {
-//     const container = $("#orders-container");
-//     container.empty();
-
-//   activeOrders.forEach(order => {
-//     const orderCard = document.createElement("div");
-//     orderCard.classList.add("order","relative","border-3", "border-solid", "rounded-md", "col-span-2");
-
-//     let itemsHTML = "";
-
-//     // Loop through the items in whole order
-//     order.items.forEach(item => {
-
-//       let ingredientsHTML = "";
-
-//       // LOOP THROUGH INGREDIENTS
-//       item.ingredients.forEach(ingredient => {
-//         let buildItems = "";
-//          if (ingredient.type === "ingredient") {
-//             if (ingredient.qty == null) {
-//                 ingredientsHTML += `<li>${ingredient.name}</li>`;
-//             } else {
-//                 ingredientsHTML += `<li>${ingredient.name} - ${ingredient.qty}</li>`;
-//             }
-            
-//         }
-//         if (ingredient.type === "modifier") {
-//             ingredientsHTML += `<li class="bg-amber-800 font-bold text-center rounded-md">${ingredient.name}</li>`;
-//         }
-//         if (ingredient.type === "tag") {
-//             ingredientsHTML += `<li class="bg-lime-700 font-bold text-center rounded-md">${ingredient.name}</li>`;
-//         }
-//         if (ingredient.type === "build") {
-//             ingredient.ingredients.forEach(i => {
-//                 buildItems += `<li>${i}</li>`;
-//             });
-//             ingredientsHTML += `
-//                 <li>
-//                 <ul class="bg-amber-800 rounded-md p-1">
-//                     <li class="font-bold text-center">${ingredient.name}</li>
-//                     ${buildItems}
-//                 </ul>
-//                 </li>
-//             `;
-//         }
-//       });
-
-//       itemsHTML += `
-//         <div class="flex-1">
-//           <h2 class="text-lg font-bold border-dashed border-b-2 p-1">
-//             ${item.itemName}
-//           </h2>
-
-//           <ul class="inline-block text-base p-2">
-//             ${ingredientsHTML}
-//           </ul>
-//         </div>
-//       `;
-
-//     });
-
-//     // Build card and HTML
-//     orderCard.innerHTML = `
-//         <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2 ">
-//             <h3 class="text-xl font-bold">Order #${order.orderNumber}</h3>
-//             <h3 class="text-2xl font-bold text-center" data-order-id=${order.orderNumber}>${order.timer}</h3>
-//             <h3 class="text-sm font-bold text-center">${order.deliverTo}</h3>
-//         </div>
-//         <div class="flex flex-row gap-4">
-//             ${itemsHTML}
-//         </div>
-//     `;
-//     //container.appendChild(orderCard);
-//     $("#orders-container").append(orderCard);
-//   });
-// }
-
-document.addEventListener("DOMContentLoaded", function () {
-  //renderOrders(); 
-});
 
 $(document).ready(function(){
 
@@ -132,11 +45,6 @@ $(document).ready(function(){
         selected.bump();
         orderController.save();
         syncOrders();
-    });
-
-    $("#bellIcon").click(function(){
-        $("#bellIcon").hide();
-        isRinging = false;
     });
 
     $("#orders-container").on("click", ".order", function (event) {
@@ -159,52 +67,136 @@ $(document).ready(function(){
         syncOrders();
     });
 
-// $(document).click(function () {
-//     if (selectedOrder) {
-//         selectedOrder.css("background-color", "rgb(8,8,8)");
-//         selectedOrder = null;
-//     }
-// });
+    $("#volume-slider").on("input", function () {
+        dingSound.volume = Number(this.value);
+    });
 
+    // Mute
+
+    $("#muted-icon").click(function(){
+      $("#mute-icon").show();
+      $("#muted-icon").hide();
+      isMuted = !isMuted;
+      dingSound.muted = isMuted;
+    });
+
+    $("#mute-icon").click(function(){
+      $("#muted-icon").show();
+      $("#mute-icon").hide();
+      isMuted = !isMuted;
+      dingSound.muted = isMuted;
+      
+    });
     
 }); 
 
-function renderIngredient(ingredient) {
-     if (ingredient.type === "modifier") {
-            return `<li class="bg-amber-800 font-bold text-center rounded-md">${ingredient.name}</li>`;
-        }
-        if (ingredient.type === "tag") {
-            return `<li class="bg-lime-700 font-bold text-center rounded-md">${ingredient.name}</li>`;
-        }
-        // if (ingredient.type === "build") {
-        //     buildItems += `<li>${ingredient.name}</li>`;
-        //     ingredient.ingredients.forEach(i => {
-        //         buildItems += `<li>${i}</li>`;
-        //     });
-        //     return buildItems;
-        // }
-        if (ingredient.type === "build") {
-            let buildItems = "";
+function formatIngredientLabel(ingredient) {
+    let label = ingredient.name;
 
-            ingredient.ingredients.forEach(i => {
-                buildItems += `<li>${i}</li>`; // for more complex builds a render special modifier function will be needed
-            });
-            return `
-            <li>
-                <ul class="bg-amber-800 rounded-md p-1">
-                <li class="font-bold text-center">${ingredient.name}</li>
-                ${buildItems}
-                </ul>
-            </li>`;
-        }
-        else {
-            if (ingredient.qty == null) {
-                return `<li>${ingredient.name}</li>`;
-            } else {
-               return `<li>${ingredient.name} - ${ingredient.qty}</li>`;
-            }
-        }
+    if (ingredient.qty) {
+        label += ` - ${ingredient.qty}`;
+    }
+
+    if (ingredient.portion) {
+        label += ` (${ingredient.portion})`;
+    }
+
+    return label;
 }
+
+function renderBasicIngredient(ingredient) {
+    return `<li>${formatIngredientLabel(ingredient)}</li>`;
+}
+
+function renderModifier(ingredient) {
+    return `
+    <li class="bg-amber-800 font-bold text-center rounded-md">
+        ${formatIngredientLabel(ingredient)}
+    </li>`;
+}
+
+function renderTag(ingredient) {
+    return `
+    <li class="bg-lime-700 font-bold text-center rounded-md">
+        ${ingredient.name}
+    </li>`;
+}
+
+function renderBuild(ingredient) {
+    let buildItems = "";
+
+    ingredient.ingredients.forEach(i => {
+        if (typeof i === "string") {
+            buildItems += `<li>${i}</li>`;
+        } else {
+            buildItems += renderIngredient(i);
+        }
+    });
+
+    return `
+    <li>
+        <ul class="bg-amber-800 rounded-md p-1">
+            <li class="font-bold text-center">${ingredient.name}</li>
+            ${buildItems}
+        </ul>
+    </li>`;
+}
+
+function renderIngredient(ingredient) {
+    switch (ingredient.type) {
+        case "modifier":
+            return renderModifier(ingredient);
+
+        case "tag":
+            return renderTag(ingredient);
+
+        case "build":
+            return renderBuild(ingredient);
+
+        default:
+            return renderBasicIngredient(ingredient);
+    }
+}
+
+// function renderIngredient(ingredient) {
+//      if (ingredient.type === "modifier") {
+//             return `<li class="bg-amber-800 font-bold text-center rounded-md">${ingredient.name}</li>`;
+//         }
+//         if (ingredient.type === "tag") {
+//             return `<li class="bg-lime-700 font-bold text-center rounded-md">${ingredient.name}</li>`;
+//         }
+//         // if (ingredient.type === "build") {
+//         //     buildItems += `<li>${ingredient.name}</li>`;
+//         //     ingredient.ingredients.forEach(i => {
+//         //         buildItems += `<li>${i}</li>`;
+//         //     });
+//         //     return buildItems;
+//         // }
+//         if (ingredient.type === "build") {
+//             let buildItems = "";
+
+//             ingredient.ingredients.forEach(i => {
+//                 buildItems += `<li>${i}</li>`; // for more complex builds a render special modifier function will be needed
+//             });
+//             return `
+//             <li>
+//                 <ul class="bg-amber-800 rounded-md p-1">
+//                 <li class="font-bold text-center">${ingredient.name}</li>
+//                 ${buildItems}
+//                 </ul>
+//             </li>`;
+//         }
+//         else {
+//             if (ingredient.qty != null) {
+//                 return `<li>${ingredient.name} - ${ingredient.qty}</li>`;
+//             } 
+//             if (ingredient.portion != null) {
+//                 return `<li>${ingredient.name} - ${ingredient.portion}</li>`;
+//             } else {
+//                 return `<li>${ingredient.name}</li>`;
+//             }
+//         }
+// }
 
 function renderItem(item,station) {
     if (station === "expo") {
@@ -358,13 +350,9 @@ function syncOrders() {
         $("#orderTotal").html(`${orderController.getTotalOrders() } Orders`);
         $("#clockTime").html(` 4:40pm`);
 
-    if (currentStation === "starter" ) {
-        let orderNum = orderController.getTotalOrders();
-        if (orderNum > 0 && isRinging) {
-            $("#bellIcon").show();
-            playOrderNotification();
-        } 
-    }
+    checkForNewStarterOrders(currentOrders, currentStation);
+    
+
 
     currentOrders.forEach(order => {
         visibleOrderIds.add(String(order.orderNumber));
@@ -433,6 +421,91 @@ function getCurrentStation() {
 
 function playOrderNotification() {
 
-    dingSound.play();
+  dingSound.currentTime = 0;
+
+  const playPromise = dingSound.play();
+  if (playPromise && typeof playPromise.catch === "function") {
+    playPromise.catch(() => {
+      // Browser may block autoplay until user interaction
+    });
+  }
 }
+
+function showBellOverlay() {
+  $("#bell-icon").removeClass("hidden").addClass("grid");
+
+  startBellSoundLoop();
+}
+
+function hideBellOverlay() {
+  $("#bell-icon").removeClass("grid").addClass("hidden");
+
+  stopBellSoundLoop();
+}
+
+function startBellSoundLoop() {
+    if (isMuted) {return;}
+
+    // Prevent stacking multiple intervals
+    if (bellSoundInterval !== null) return;
+
+    playOrderNotification(); // play immediately
+
+    bellSoundInterval = setInterval(() => {
+        playOrderNotification();
+    }, 3000);
+}
+
+function stopBellSoundLoop() {
+    if (bellSoundInterval !== null) {
+        clearInterval(bellSoundInterval);
+        bellSoundInterval = null;
+    }
+}
+
+
+function checkForNewStarterOrders(currentOrders, currentStation) {
+    if (currentStation !== "starter") {
+        hideBellOverlay();
+        return;
+    }
+
+    const starterOrders = currentOrders.filter(order => {
+        return order.getStationState("starter") === "active";
+    });
+
+    if (starterOrders.length === 0) {
+        lastStarterOrderTime = 0;
+        lastStarterOrderCount = 0; // 👈 ADD THIS
+        return;
+    }
+
+    const newestStarterOrderTime = Math.max(
+        ...starterOrders.map(order => order.orderStartTime)
+    );
+
+    if (!starterOrdersLoaded) {
+        lastStarterOrderTime = newestStarterOrderTime;
+        starterOrdersLoaded = true;
+        hideBellOverlay();
+        return;
+    }
+
+    
+
+    const currentStarterOrders = currentOrders.filter(order => {
+        return order.getStationState("starter") === "active";
+    });
+    const currentCount = currentStarterOrders.length;
+
+    const isFirstOrder = lastStarterOrderCount === 0 && currentCount > 0;
+
+    if (isFirstOrder) {
+        showBellOverlay();
+    }
+
+    lastStarterOrderCount = currentCount;
+}
+
+
 

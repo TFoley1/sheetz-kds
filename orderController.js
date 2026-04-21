@@ -36,7 +36,6 @@ class OrderController {
     // get random items from json
     async getRandomItems(count = 1) {
         // Load paths for items
-        console.log("getting random items - line 38");
         const res = await fetch('orderItems/menu.json');
         const itemPaths = await res.json();
 

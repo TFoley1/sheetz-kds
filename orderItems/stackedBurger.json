@@ -8,8 +8,8 @@
             { "name": "Send To Finisher", "type": "tag" },
             { "name": "American Cheese", "qty": 2, "type": "ingredient" },
             {
-                "type": "build",
                 "name": "BUILD",
+                "type": "build",
                 "ingredients": [
                 "Stacked Burger",
                 "American Cheese",
