@@ -210,12 +210,12 @@ function renderIngredient(ingredient) {
 // }
 
 function renderItem(item,station) {
-    if (station === "expo") {
+    if (station === "expo" && item.qty == null) {
         return `
-            <div class="border-b-2 p-2 text-xl font-bold">
+            <div class="border-b-2 p-2 text-3xl font-bold">
                 ${item.itemName}
             </div>
-        `; //       ^ later will need to add quantity of items
+        `; //       ^  - ${item.qty}  later will need to add quantity of items      ^  - ${item.qty}  later will need to add quantity of items
     }
     
 
@@ -284,13 +284,13 @@ function renderOrder(order,station) {
 
     let bodyClass;
     if (station === "expo") {
-        bodyClass = "grid grid-cols-1 gap-2 p-3";
+        bodyClass = "grid grid-cols-1 gap-2";
     } else {
-        bodyClass = "flex flex-row gap-4";
+        bodyClass = "flex flex-row gap-4 pb-10";
     }
     if (order.deliverTo.includes("DoorDash")) {
         orderCard.innerHTML = `
-        <div class="grid grid-cols-3 gap-4 ${headerClass} rounded-xl items-center justify-center ">
+        <div class="grid grid-cols-3 gap-4 ${headerClass} rounded-xl items-center justify-center pb-8 ">
             <h3 class="text-3xl font-bold">Order #${order.orderNumber}</h3>
             <h3 class="text-5xl font-bold text-center" data-role="timer">${order.timer}</h3>
             <div class="flex items-center justify-center gap-2 rounded-md bg-[#ff3008] px-3 py-2">
@@ -373,8 +373,6 @@ function syncOrders() {
 
 
     updateAllOrderTimers(currentOrders);
-        $("#orderTotal").html(`${orderController.getTotalOrders() } Orders`);
-        $("#clockTime").html(` 4:40pm`);
 
     checkForNewStarterOrders(currentOrders, currentStation);
     

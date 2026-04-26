@@ -13,7 +13,7 @@
     <link rel="icon" type="image/x-icon" href="freakIcon.ico">
     <title>Freak KDS - Expo</title>
 </head>
-<body>
+<body class="pl-64">
 <!-- Modal for Menu -->
 <div class="fixed inset-0 z-40 flex items-center justify-center" id="volume-modal">
 
@@ -37,134 +37,25 @@
   </div>
 </div>
 
+<!-- UI -->
+
 <div id="bell-icon" class="hidden fixed inset-0 z-40 flex grid h-screen place-items-center h-64 z-60 opacity-50">
       <img src="img/bell-icon.png" class="h-96 w-96 pointer-events-auto">
 </div>
 
-<div id="main-container" class="grid grid-cols-4">
-
-   <div class="flex items-center ">
-    <!-- <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute bottom-30 text-center"><p class="text-xl">Recall Order</p></div> -->
-     <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute left-2 bottom-5 text-center cursor-pointer" id="bump-btn"""><p class="text-xl">Bump Order</p></div>
-    <!-- <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 absolute text-center cursor-pointer bottom-55" id="switch-station-btn"><p class="text-xl">Switch Station</p></div> -->
-  </div>
-  
-  
-  <div id="orders-container" class="grid grid-cols-2 gap-4 col-span-2">
-    
-<!-- 
-    <div class="order relative border-3 border-solid rounded-md mb-5">
-      <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2 ">
-        <h3 class="text-2xl font-bold text-left">#849</h3>
-        <h3 class="text-2xl font-bold text-center">1:09</h3>
-        <h3 class="text-sm font-bold text-right ">Deliver To: Customer at Expo</h3>
-      </div>
-      <div class="flex flex-row gap-4">
-      <div class="flex-1">
-        <h2 class="text-lg font-bold border-dashed border-b-2 p-1">Street Tacos</h2>
-        <ul class="text-base p-2">
-          <li>Tortilla</li>
-          <li>Taco Beef</li>
-          <li>*Send To Finisher*</li>
-          <li>Shredded Cheddar</li>
-          <li>Lettuce</li>
-        </ul> 
-      </div>
-      </div>
-      <!-- <div class="bump-btn absolute bottom-0 right-0 bg-neutral-500 inline-block p-3 font-bold text-center text-2xl rounded-md border-3 m-2">
-        <p>Bump</p>
-      </div>
-  </div>
- <!--
-      <div class="order relative border-3 border-solid rounded-md mb-5">
-      <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2 ">
-        <h3 class="text-2xl font-bold text-left">#849</h3>
-        <h3 class="text-2xl font-bold text-center">1:09</h3>
-        <h3 class="text-sm font-bold text-right ">Deliver To: Customer at Expo</h3>
-      </div>
-
-      <div class="flex-1">
-          <h2 class="text-lg font-bold border-dashed border-b-2 p-1">Stacked Burger</h2>
-            <ul class=" inline-block text-base p-2">
-              <li>Bun</li>
-              <li class="bg-amber-800 rounded-md font-bold text-center">TOAST</li>
-              <li>Mayo</li>
-              <li>Ketchup</li>
-              <li>Stacked Burger - 2</li>
-              <li class="bg-lime-700 rounded-md font-bold text-center">Send To Finisher</li>
-              <li>American Cheese - 2</li>
-              <li>
-                <ul class="bg-amber-800 rounded-md p-1">
-                  <li class="font-bold text-center">BUILD</li>
-                  <li>Stacked Burger</li>
-                  <li>American Cheese</li>
-                  <li>Stacked Burger</li>
-                  <li>American Cheese</li>
-                </ul>
-              </li>
-              <li>Lettuce</li>
-            </ul>
-          </div>
-          
-        </div>
-
-        
-    
-
-
-    <div class="order relative border-3 border-solid rounded-md col-span-2">
-      <div class="grid grid-cols-3 gap-4 bg-green-700 border-b-3 p-2 ">
-        <h3 class="text-2xl font-bold text-left">#849</h3>
-        <h3 class="text-2xl font-bold text-center">1:09</h3>
-        <h3 class="text-sm font-bold text-right ">Deliver To: Customer at Expo</h3>
-      </div>
-
-      <div class="grid grid-flow-col gap-4">
-
-        <div class="flex-1">
-          <h2 class="text-lg font-bold border-dashed border-b-2 p-1">Street Tacos</h2>
-            <ul class="text-base p-2">
-              <li>Tortilla</li>
-              <li>Taco Beef</li>
-              <li>*Send To Finisher*</li>
-              <li>Shredded Cheddar</li>
-              <li>Lettuce</li>
-            </ul>
-        </div>
-
-        <div class="flex-1">
-          <h2 class="text-lg font-bold border-dashed border-b-2 p-1">Stacked Burger</h2>
-            <ul class=" inline-block text-base p-2">
-              <li>Bun</li>
-              <li class="bg-amber-800 rounded-md font-bold text-center">TOAST</li>
-              <li>Mayo</li>
-              <li>Ketchup</li>
-              <li>Stacked Burger - 2</li>
-              <li class="bg-lime-700 rounded-md font-bold text-center">Send To Finisher</li>
-              <li>American Cheese - 2</li>
-              <li>
-                <ul class="bg-amber-800 rounded-md p-1">
-                  <li class="font-bold text-center">BUILD</li>
-                  <li>Stacked Burger</li>
-                  <li>American Cheese</li>
-                  <li>Stacked Burger</li>
-                  <li>American Cheese</li>
-                </ul>
-              </li>
-              <li>Lettuce</li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
-
-  </div>
- 
-  <div class="flex flex-col items-center h-screen">
-    <div>
-      <p class="text-center text-xl">Orders</p>
-      <p class="text-center text-xl" id="clock-time"></p>
+<div class="fixed left-2 bottom-5 z-50">
+    <div class="w-48 h-20 rounded-md bg-neutral-500 p-3 text-center cursor-pointer" id="bump-btn">
+      <p class="text-xl">Bump Order</p>
     </div>
-    
+  </div>
+
+
+  <div class="fixed top-0 right-10 h-full w-48 items-center h-screen text-2xl">
+    <div>
+      <p class="text-center">Orders</p>
+      <p class="text-center" id="clock-time"></p>
+    </div>
+    <br>
     <div>
       <pre class="text-center text-xl">#649  6 Mins✅</pre>
       <hr>
@@ -178,9 +69,9 @@
       <hr>
     </div>
     
-    <div class="absolute bottom-50">
+    <div class="absolute right-10 bottom-50">
       <div class="flex items-center h-40 w-40 rounded-full border-5 border-green-600 text-center">
-        <p class="text-lg  w-full font-bold">Freak Status!</p>
+        <p class="text-3xl  w-full font-bold">Freak Status!</p>
       </div>
     </div>
   </div>
@@ -211,6 +102,20 @@
     <a href="finisher.html"><div class="cursor-pointer rounded px-3 py-1">Finisher</div></a>
     <a href="expo.html"><div class="cursor-pointer rounded px-3 py-1">Expo</div></a>
   </div>
+
+  <!-- ORDERS -->
+
+<div id="main-container" class="grid grid-cols-4">
+  <div id="orders-container" class="fixed
+    fixed top-4 left-48 right-72 bottom-24
+    grid grid-cols-2 gap-6
+    justify-center
+    auto-rows-max
+    overflow-y-auto
+    px-6
+">
 </div>
+</div>
+
 </body>
 </html>

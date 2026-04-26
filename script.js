@@ -57,6 +57,10 @@ $(document).ready(function(){
       orderController.injectRandomOrder();
     });
 
+   $("#clear-storage-btn").click(function () {
+        orderController.load()
+        syncOrders();
+    });
     
 
     $("#bell-icon").click(function () {
