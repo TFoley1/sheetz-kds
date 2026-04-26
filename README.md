@@ -4,6 +4,8 @@ A modern web-based Kitchen Display System created to improve communication, visi
 
 This project was built as a proof of concept to present new ideas and inspire improvement within Sheetz operations.
 
+![Alt Text](./img/Freak KDS.gif)
+
 ## Why I Built This
 
 The current system gets the job done and that fine.
